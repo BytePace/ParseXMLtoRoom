@@ -17,7 +17,7 @@ abstract class XmlListObjects {
     @set:Element(name = NAME)
     var name = ""
 
-    @get:Element(name = ERROR)
-    @set:Element(name = ERROR)
+    @get:Element(name = ERROR, required = false)
+    @set:Element(name = ERROR, required = false)
     var error = ""
 }

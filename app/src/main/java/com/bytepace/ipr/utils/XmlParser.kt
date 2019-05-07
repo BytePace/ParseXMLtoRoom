@@ -34,5 +34,17 @@ class XmlParser {
             }
             return result
         }
+
+        fun <T: XmlListObjects> parsePull(xml: String?, contentTag: String, tClass: Class<T>): T? {
+            val serialiser = Persister()
+            val result : T?
+            if (xml != null) {
+                val resultXml = cutXML(xml, contentTag)
+                result = serialiser.read(tClass, resultXml, false)
+            } else {
+                result = null
+            }
+            return result
+        }
     }
 }

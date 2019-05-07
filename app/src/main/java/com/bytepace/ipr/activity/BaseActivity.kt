@@ -19,9 +19,6 @@ abstract class BaseActivity: AppCompatActivity() {
                 callback()
                 dialog.dismiss()
             }
-            dialogBuilder.setNegativeButton(android.R.string.no) { dialog, _ ->
-                dialog.dismiss()
-            }
             dialogBuilder.setCancelable(true)
             uiThread {
                 dialogBuilder.create().show()

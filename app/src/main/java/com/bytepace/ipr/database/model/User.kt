@@ -21,9 +21,6 @@ open class User: BaseDBObject(), Serializable {
     @set:Element(name = PASSWORD)
     @ColumnInfo(name = PASSWORD)
     var password: String = ""
-        set(value) {
-            HashUtil.sha1(value)
-        }
 
     @get:Element(name = EMAIL)
     @set:Element(name = EMAIL)

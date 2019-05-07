@@ -3,6 +3,7 @@
     package="com.bytepace.ipr">
 
     <application
+            android:name=".App"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ActivityUsers" />
+
+        <activity
+            android:name=".activity.ActivityUsers" />
 
     </application>
 </manifest>
