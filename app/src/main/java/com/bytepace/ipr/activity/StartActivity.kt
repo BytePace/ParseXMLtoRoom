@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.View
 import com.bytepace.ipr.App
 import com.bytepace.ipr.R
+import com.bytepace.ipr.database.model.Currency
+import com.bytepace.ipr.database.model.Device
+import com.bytepace.ipr.database.model.User
 import com.bytepace.ipr.database.model.only_xml.CurrencyList
 import com.bytepace.ipr.database.model.only_xml.DeviceList
 import com.bytepace.ipr.database.model.only_xml.UserList
@@ -38,17 +41,38 @@ class StartActivity: BaseActivity() {
         buttonPullParser.isEnabled = false
         val timeBegin = Calendar.getInstance().timeInMillis
         doAsync {
-            val users = XmlParser.parseXml(USERS, "return", UserList::class.java)
-            val currencies = XmlParser.parseXml(CURRENCY, "return", CurrencyList::class.java)
-            val devices = XmlParser.parseXml(DEVICES, "return", DeviceList::class.java)
-            if (users?.objects != null && users.objects.isNotEmpty()) {
-                App.database.users().insertAll(users.objects)
-            }
-            if (currencies?.objects != null && currencies.objects.isNotEmpty()) {
-                App.database.currencies().insertAll(currencies.objects)
-            }
-            if (devices?.objects != null && devices.objects.isNotEmpty()) {
-                App.database.devices().insertAll(devices.objects)
+            if (isPullParser) {
+                val users = XmlParser.parsePull(USERS, "return") {
+                    return@parsePull User()
+                }
+                val currencies = XmlParser.parsePull(CURRENCY, "return") {
+                    return@parsePull Currency()
+                }
+                val devices = XmlParser.parsePull(DEVICES, "return") {
+                    return@parsePull Device()
+                }
+                if (users != null && users.isNotEmpty()) {
+                    App.database.users().insertAll(users)
+                }
+                if (currencies != null && currencies.isNotEmpty()) {
+                    App.database.currencies().insertAll(currencies)
+                }
+                if (devices != null && devices.isNotEmpty()) {
+                    App.database.devices().insertAll(devices)
+                }
+            } else {
+                val users = XmlParser.parseXml(USERS, "return", UserList::class.java)
+                val currencies = XmlParser.parseXml(CURRENCY, "return", CurrencyList::class.java)
+                val devices = XmlParser.parseXml(DEVICES, "return", DeviceList::class.java)
+                if (users?.objects != null && users.objects.isNotEmpty()) {
+                    App.database.users().insertAll(users.objects)
+                }
+                if (currencies?.objects != null && currencies.objects.isNotEmpty()) {
+                    App.database.currencies().insertAll(currencies.objects)
+                }
+                if (devices?.objects != null && devices.objects.isNotEmpty()) {
+                    App.database.devices().insertAll(devices.objects)
+                }
             }
             uiThread {
                 val timeEnd = Calendar.getInstance().timeInMillis
@@ -56,6 +80,7 @@ class StartActivity: BaseActivity() {
                 val parseTime = timeEnd - timeBegin
                 showConfirmationAlert("Parse time: $parseTime ms", "Parsing successfull") {
                     startActivity(Intent(this@StartActivity, ActivityUsers::class.java))
+                    finish()
                 }
             }
         }
