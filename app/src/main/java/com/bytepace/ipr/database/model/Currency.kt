@@ -18,4 +18,16 @@ class Currency: BaseDBObject(), Serializable {
         get() {
             return parseBitmapFromBase64(iconBase64)
         }
+
+    override fun set(key: String, value: String) {
+        when(key) {
+            ICON -> {
+                iconBase64 = value
+            }
+
+            else -> {
+                super.set(key, value)
+            }
+        }
+    }
 }

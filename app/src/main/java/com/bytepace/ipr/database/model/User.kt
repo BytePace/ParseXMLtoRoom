@@ -4,7 +4,6 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import com.bytepace.ipr.database.*
-import com.bytepace.ipr.utils.HashUtil
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import java.io.Serializable
@@ -52,4 +51,40 @@ open class User: BaseDBObject(), Serializable {
     @set:ElementList(inline = true, entry = MOBILE_PHONES)
     @ColumnInfo(name = MOBILE_PHONES)
     var mobilePhones: ArrayList<String> = ArrayList()
+
+    override fun set(key: String, value: String) {
+        when (key) {
+            LOGIN -> {
+                login = value
+            }
+
+            PASSWORD -> {
+                password = value
+            }
+
+            EMAIL -> {
+                email = value
+            }
+
+            DATE_OF_BIRTH -> {
+                dateOfBirthString = value
+            }
+
+            DEVICE -> {
+                deviceID = value
+            }
+
+            SEX -> {
+                sex = value
+            }
+
+            else -> {
+                super.set(key, value)
+            }
+        }
+    }
+
+    override fun setArray(key: String, value: java.util.ArrayList<String>) {
+        mobilePhones = value
+    }
 }

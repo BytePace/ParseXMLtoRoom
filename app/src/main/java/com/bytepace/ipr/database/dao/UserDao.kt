@@ -17,5 +17,5 @@ interface UserDao: BaseDao<User> {
 
     @Transaction
     @Query("Select * from User where not is_hidden and not is_removed")
-    fun getAll(): List<UserRelation>
+    fun getAll(): Array<UserRelation>
 }

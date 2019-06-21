@@ -55,4 +55,40 @@ open class Device: BaseDBObject(), Serializable {
     @set:Element(name = CURRENCY)
     @ColumnInfo(name =  CURRENCY)
     var currencyID: String = ""
+
+    override fun set(key: String, value: String) {
+        when (key) {
+            PLATFORM -> {
+                platform = value
+            }
+
+            PLATFORM_VERSION -> {
+                platformVersion = value
+            }
+
+            SCREEN_DIAGONAL -> {
+                screenDiagonal = value
+            }
+
+            COLOR -> {
+                colorString = value
+            }
+
+            DATE -> {
+                dateString = value
+            }
+
+            COST -> {
+                cost = value.toDouble()
+            }
+
+            CURRENCY -> {
+                currencyID = value
+            }
+
+            else -> {
+                super.set(key, value)
+            }
+        }
+    }
 }
