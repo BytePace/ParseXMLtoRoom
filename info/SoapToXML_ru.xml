@@ -1,0 +1,41 @@
+<!-- до очистки -->
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <m:Response xmlns:m="tp.mobile">
+            <m:return xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <m:name>Название объекта</m:name>
+                <m:error>Кол-во ошибок</m:error>
+                <m:objects_qty>Кол-во объектов в ответе</m:objects_qty>
+                <m:information version="3"
+						is_deleted="false"
+						hide="false">
+                    <m:id>object_id</m:id>
+					
+                    <!-- остальные поля объекта -->
+					
+                </m:information>
+				
+                <!-- остальные объекты information -->
+				
+            </m:return>
+        </m:Response>
+    </soap:Body>
+</soap:Envelope>
+
+<!-- после очистки -->
+
+<return>
+	<name>Название объекта</name>
+	<error>Кол-во ошибок</error>
+	<objects_qty>Кол-во объектов в ответе</objects_qty>
+	<information version="3" is_deleted="false" hide="false">
+		<id>object_id</id>
+		
+		<!-- остальные поля объекта -->
+		
+	</information>
+	
+	<!-- остальные объекты information -->
+</return>
