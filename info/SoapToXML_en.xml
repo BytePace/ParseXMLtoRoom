@@ -1,0 +1,41 @@
+<!-- before clearing -->
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <m:Response xmlns:m="tp.mobile">
+            <m:return xmlns:xs="http://www.w3.org/2001/XMLSchema"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <m:name>Object name</m:name>
+                <m:error>Errors count</m:error>
+                <m:objects_qty>Objects count</m:objects_qty>
+                <m:information version="3"
+						is_deleted="false"
+						hide="false">
+                    <m:id>object_id</m:id>
+					
+                    <!-- next object properties -->
+					
+                </m:information>
+				
+                <!-- next objects -->
+				
+            </m:return>
+        </m:Response>
+    </soap:Body>
+</soap:Envelope>
+
+<!-- after clearing -->
+
+<return>
+	<name>Object name</name>
+	<error>Errors count</error>
+	<objects_qty>Objects count</objects_qty>
+	<information version="3" is_deleted="false" hide="false">
+		<id>object_id</id>
+		
+		<!-- next object properties -->
+		
+	</information>
+	
+	<!-- next objects -->
+</return>
